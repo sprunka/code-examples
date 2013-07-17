@@ -2,8 +2,6 @@ CREATE TABLE `job_info` (
   `job_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `job_title` text NOT NULL,
   `salary` varchar(10) NOT NULL COMMENT 'Assumes max salary of $9,999,999. Ideally this should be purely numeric, with all formatting stripped on input and applied on output. MEDIUMINT, unsigned would handle a max salary of approx. $8million',
-  `permission_level` enum('admin','user') NOT NULL DEFAULT 'user',
-  `is_permission_level_active` enum('true','false') NOT NULL DEFAULT 'false' COMMENT 'Consider using tinyint(1) or boolean here. Actual TRUE and FALSE, instead of interpretting strings.',
   `start_date` date NOT NULL,
   PRIMARY KEY (`job_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -21,6 +19,8 @@ CREATE TABLE `employee_info` (
   `username` varchar(64) NOT NULL,
   `email1` varchar(64) NOT NULL,
   `email2` varchar(128) DEFAULT NULL,
+  `permission_level` enum('admin','user') NOT NULL DEFAULT 'user',
+  `is_permission_level_active` enum('true','false') NOT NULL DEFAULT 'false' COMMENT 'Consider using tinyint(1) or boolean here. Actual TRUE and FALSE, instead of interpretting strings.',
   `password` char(32) NOT NULL COMMENT 'this assumes keeping the current password encryption, and encrypting/decrypting external to the database.',
   `employer_id` int(10) unsigned NOT NULL,
   `job_id` int(10) unsigned NOT NULL,
